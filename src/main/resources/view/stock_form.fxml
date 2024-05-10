@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ebdbfd; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Pharmacy.controller.StockFormController">
+   <children>
+      <Text fill="#a020f0" layoutX="359.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock Manage">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tblStock" layoutX="69.0" layoutY="91.0" prefHeight="275.0" prefWidth="750.0">
+        <columns>
+          <TableColumn fx:id="colCode" prefWidth="200.0" text="Item Code" />
+          <TableColumn fx:id="colName" prefWidth="243.0" text="Name" />
+            <TableColumn fx:id="colUnitprice" prefWidth="204.0" text="Unit Price" />
+            <TableColumn fx:id="colQty" prefWidth="102.0" text="Qty" />
+        </columns>
+      </TableView>
+      <Text fill="#a020f0" layoutX="388.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new Item">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="94.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Code:">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text layoutX="469.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item name:">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text layoutX="96.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unit Price:">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text layoutX="469.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty:">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <TextField fx:id="txtCode" layoutX="197.0" layoutY="429.0" onAction="#txtSearchOnAction" prefHeight="30.0" prefWidth="220.0" />
+      <TextField fx:id="txtName" layoutX="575.0" layoutY="429.0" prefHeight="30.0" prefWidth="220.0" />
+      <TextField fx:id="txtUnitprice" layoutX="197.0" layoutY="483.0" prefHeight="30.0" prefWidth="220.0" />
+      <TextField fx:id="txtQty" layoutX="575.0" layoutY="483.0" prefHeight="30.0" prefWidth="220.0" />
+      <Button layoutX="764.0" layoutY="550.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Delete" textFill="WHITE" />
+      <Button layoutX="641.0" layoutY="550.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Clear" textFill="WHITE" />
+      <Button layoutX="524.0" layoutY="550.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Save" textFill="WHITE" />
+      <Button layoutX="400.0" layoutY="550.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Update" textFill="WHITE" />
+      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="530.0" layoutY="553.0">
+         <image>
+            <Image url="@../asserts.icon/save%20icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="406.0" layoutY="553.0">
+         <image>
+            <Image url="@../asserts.icon/update%20icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="647.0" layoutY="553.0">
+         <image>
+            <Image url="@../asserts.icon/clear%20icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="772.0" layoutY="553.0">
+         <image>
+            <Image url="@../asserts.icon/delete%20icon.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
