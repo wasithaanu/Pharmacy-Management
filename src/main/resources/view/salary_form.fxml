@@ -10,16 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ebdbfd; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Pharmacy.controller.SalaryFormController">
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ebdbfd; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Pharmacy.controller.SalaryFormController">
    <children>
       <Text fill="#a020f0" layoutX="354.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salary Manage">
          <font>
             <Font name="System Bold" size="23.0" />
-         </font>
-      </Text>
-      <Text layoutX="230.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salary id :">
-         <font>
-            <Font size="15.0" />
          </font>
       </Text>
       <Text layoutX="535.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee id :">
@@ -27,46 +22,45 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField layoutX="230.0" layoutY="110.0" prefHeight="30.0" prefWidth="220.0" />
-      <TextField layoutX="535.0" layoutY="110.0" prefHeight="30.0" prefWidth="220.0" />
+      <TextField fx:id="txtId" layoutX="535.0" layoutY="110.0" onAction="#txtSearchOnAction" prefHeight="30.0" prefWidth="220.0" />
       <Text layoutX="230.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField layoutX="230.0" layoutY="193.0" prefHeight="30.0" prefWidth="220.0" />
+      <TextField fx:id="txtName" layoutX="230.0" layoutY="193.0" prefHeight="30.0" prefWidth="220.0" />
       <Text layoutX="535.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Month :">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField layoutX="535.0" layoutY="193.0" prefHeight="30.0" prefWidth="220.0" />
+      <TextField fx:id="txtMonth" layoutX="535.0" layoutY="193.0" prefHeight="30.0" prefWidth="220.0" />
       <Text layoutX="230.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField layoutX="230.0" layoutY="276.0" prefHeight="30.0" prefWidth="220.0" />
+      <TextField fx:id="txtDate" layoutX="230.0" layoutY="276.0" prefHeight="30.0" prefWidth="220.0" />
       <Text layoutX="535.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount :">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField layoutX="535.0" layoutY="276.0" prefHeight="30.0" prefWidth="220.0" />
-      <TableView layoutX="70.0" layoutY="330.0" prefHeight="200.0" prefWidth="760.0">
+      <TextField fx:id="txtAmount" layoutX="535.0" layoutY="276.0" prefHeight="30.0" prefWidth="220.0" />
+      <TableView fx:id="tblSalary" layoutX="70.0" layoutY="330.0" prefHeight="200.0" prefWidth="760.0">
         <columns>
-          <TableColumn prefWidth="99.0" text=" Salary id" />
-          <TableColumn prefWidth="105.0" text="Emp id" />
-            <TableColumn prefWidth="149.0" text="Name" />
-            <TableColumn prefWidth="132.0" text="Month" />
-            <TableColumn prefWidth="130.0" text="Date" />
-            <TableColumn prefWidth="144.0" text="Amount" />
+          <TableColumn fx:id="colSalaryId" prefWidth="99.0" text=" Salary id" />
+          <TableColumn fx:id="colId" prefWidth="105.0" text="Emp id" />
+            <TableColumn fx:id="colName" prefWidth="149.0" text="Name" />
+            <TableColumn fx:id="colMonth" prefWidth="132.0" text="Month" />
+            <TableColumn fx:id="colDate" prefWidth="130.0" text="Date" />
+            <TableColumn fx:id="colAmount" prefWidth="144.0" text="Amount" />
         </columns>
       </TableView>
-      <Button layoutX="772.0" layoutY="548.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Delete" textFill="WHITE" />
-      <Button layoutX="658.0" layoutY="548.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Clear" textFill="WHITE" />
-      <Button layoutX="540.0" layoutY="548.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Save" textFill="WHITE" />
-      <Button layoutX="426.0" layoutY="548.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Update" textFill="WHITE" />
+      <Button layoutX="772.0" layoutY="548.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Delete" textFill="WHITE" />
+      <Button layoutX="658.0" layoutY="548.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Clear" textFill="WHITE" />
+      <Button layoutX="540.0" layoutY="548.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Save" textFill="WHITE" />
+      <Button layoutX="426.0" layoutY="548.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Update" textFill="WHITE" />
       <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="667.0" layoutY="551.0">
          <image>
             <Image url="@../asserts.icon/clear icon.png" />

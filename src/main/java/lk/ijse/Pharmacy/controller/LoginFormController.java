@@ -78,7 +78,7 @@ public class LoginFormController {
         AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/registration_form.fxml"));
 
         Scene scene = new Scene(anchorPane);
-        Stage stage = new Stage();
+        Stage stage = (Stage) this.root.getScene().getWindow();
         stage.setScene(scene);
 
         stage.setTitle("Registration Form");
@@ -86,4 +86,3 @@ public class LoginFormController {
         stage.show();
     }
 }
-
