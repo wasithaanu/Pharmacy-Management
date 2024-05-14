@@ -83,4 +83,14 @@ public class EmployeeRepo {
         }
         return employee;
     }
+
+    public static boolean delete(String id) throws SQLException {
+        String sql = "DELETE FROM employee WHERE cu_id = ?";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        pstm.setObject(1, id);
+
+        return pstm.executeUpdate() > 0;
+    }
 }

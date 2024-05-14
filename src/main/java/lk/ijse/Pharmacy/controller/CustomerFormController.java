@@ -56,6 +56,27 @@ public class CustomerFormController {
         this.customerList = getAllCustomers();
         setCellValueFactory();
         loadCustomerTable();
+        loadNextOrderId();
+    }
+    private void loadNextOrderId() {
+        try {
+            String currentId = CustomerRepo.currentId();
+            String nextId = nextId(currentId);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String nextId(String currentId) {
+        if (currentId != null) {
+            String[] split = currentId.split("C");
+//            System.out.println("Arrays.toString(split) = " + Arrays.toString(split));
+            int id = Integer.parseInt(split[1]);    //2
+            return "C" + ++id;
+
+        }
+        return "O1";
     }
 
     private void setCellValueFactory() {

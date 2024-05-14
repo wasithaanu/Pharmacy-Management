@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeFormController {
-    @FXML
-    private AnchorPane root;
 
     @FXML
     private TableColumn<?, ?> colDate;
@@ -40,13 +38,16 @@ public class EmployeeFormController {
     private TableColumn<?, ?> colOuttime;
 
     @FXML
+    private AnchorPane root;
+
+    @FXML
     private TableView<EmployeeTm> tblEmployee;
 
     @FXML
-    private TextField tetId;
+    private TextField txtDate;
 
     @FXML
-    private TextField txtDate;
+    private TextField txtId;
 
     @FXML
     private TextField txtIntime;
@@ -64,6 +65,15 @@ public class EmployeeFormController {
         setCellValueFactory();
         loadEmployeeTable();
     }
+    private void setCellValueFactory() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colIntime.setCellValueFactory(new PropertyValueFactory<>("inTime"));
+        colOuttime.setCellValueFactory(new PropertyValueFactory<>("outTime"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+    }
+
 
     private void loadEmployeeTable() {
         ObservableList<EmployeeTm> tmList = FXCollections.observableArrayList();
@@ -72,9 +82,9 @@ public class EmployeeFormController {
             EmployeeTm employeeTm = new EmployeeTm(
                     employee.getId(),
                     employee.getName(),
-                    employee.getDate(),
                     employee.getInTime(),
-                    employee.getOutTime()
+                    employee.getOutTime(),
+                    employee.getDate()
             );
 
             tmList.add(employeeTm);
@@ -83,15 +93,9 @@ public class EmployeeFormController {
         EmployeeTm selectedItem = (EmployeeTm) tblEmployee.getSelectionModel().getSelectedItem();
         System.out.println("selectedItem = " + selectedItem);
 
+
     }
 
-    private void setCellValueFactory() {
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colIntime.setCellValueFactory(new PropertyValueFactory<>("inTime"));
-        colOuttime.setCellValueFactory(new PropertyValueFactory<>("outTime"));
-        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-    }
 
     private List<Employee> getAllEmployee() {
         List<Employee> employeeList = null;
@@ -109,23 +113,22 @@ public class EmployeeFormController {
     }
 
     private void clearFields() {
-
-            tetId.setText("");
-            txtName.setText("");
-            txtIntime.setText("");
-            txtOuttime.setText("");
-            txtDate.setText("");
+        txtId.setText("");
+        txtName.setText("");
+        txtIntime.setText("");
+        txtOuttime.setText("");
+        txtDate.setText("");
 
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        String id = tetId.getText();
+        String id = txtId.getText();
 
         try {
-            boolean isDeleted = CustomerRepo.delete(id);
+            boolean isDeleted = EmployeeRepo.delete(id);
             if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "customer deleted!").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "employee deleted!").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -134,13 +137,13 @@ public class EmployeeFormController {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
-        String id = tetId.getText();
+        String id = txtId.getText();
         String name = txtName.getText();
         String inTime = txtIntime.getText();
         String outTime = txtOuttime.getText();
-        String date = txtIntime.getText();
+        String date = txtDate.getText();
 
-        Employee employee = new Employee(id, name, inTime, outTime,date);
+        Employee employee = new Employee(id, name, inTime, outTime, date);
 
         try {
             boolean isSaved = EmployeeRepo.save(employee);
@@ -152,16 +155,16 @@ public class EmployeeFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        String id = tetId.getText();
+        String id = txtId.getText();
         String name = txtName.getText();
         String inTime = txtIntime.getText();
         String outTime = txtOuttime.getText();
         String date = txtDate.getText();
 
-        Employee employee = new Employee(id, name, inTime, outTime,date);
+        Employee employee = new Employee(id, name, inTime, outTime, date);
 
         try {
-            boolean isUpdated = EmployeeRepo.update(employee);
+            boolean isUpdated =EmployeeRepo.update(employee);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "customer updated!").show();
             }
@@ -172,22 +175,22 @@ public class EmployeeFormController {
 
     @FXML
     void txtSearchOnAction(ActionEvent event) {
-        String id = tetId.getText();
+        String id = txtId.getText();
 
         try {
             Employee employee = EmployeeRepo.searchById(id);
 
             if (employee != null) {
-                tetId.setText(employee.getId());
+                txtId.setText(employee.getId());
                 txtName.setText(employee.getName());
                 txtIntime.setText(employee.getInTime());
                 txtOuttime.setText(employee.getOutTime());
                 txtDate.setText(employee.getDate());
+
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
-
 
 }

@@ -8,10 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class EmployeeTm {
+ public class EmployeeTm {
     private String id;
     private String name;
     private String inTime;
     private String outTime;
     private String date;
+
 }

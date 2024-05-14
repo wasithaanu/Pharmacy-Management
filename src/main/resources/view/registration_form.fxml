@@ -5,48 +5,46 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="root" prefHeight="600.0" prefWidth="900.0" style="-fx-border-radius: 50; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Pharmacy.controller.RegisterFormController">
    <children>
+      <ImageView fitHeight="601.0" fitWidth="540.0" layoutX="368.0">
+         <image>
+            <Image url="@../asserts.icon/login page colour theme.jpg" />
+         </image>
+      </ImageView>
       <Text fill="#a020f0" layoutX="92.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration Form">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="txtUserId" layoutX="47.0" layoutY="128.0" prefHeight="44.0" prefWidth="273.0" />
+      <TextField fx:id="txtUserId" layoutX="47.0" layoutY="128.0" prefHeight="38.0" prefWidth="273.0" />
       <Text layoutX="50.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User ID" />
-      <Text fill="#9e9191" layoutX="60.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your user id here">
+      <Text fill="#9e9191" layoutX="65.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your user id here">
          <font>
             <Font size="10.0" />
          </font>
       </Text>
       <Text layoutX="47.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
-      <TextField fx:id="txtUserName" layoutX="47.0" layoutY="235.0" prefHeight="44.0" prefWidth="273.0" />
-      <Text fill="#9e9191" layoutX="65.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your username here">
+      <TextField fx:id="txtUserName" layoutX="47.0" layoutY="235.0" prefHeight="38.0" prefWidth="273.0" />
+      <Text fill="#9e9191" layoutX="65.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your username here">
          <font>
             <Font size="10.0" />
          </font>
       </Text>
       <Text layoutX="49.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-      <TextField fx:id="txtPassword" layoutX="47.0" layoutY="339.0" prefHeight="44.0" prefWidth="273.0" />
-      <Text fill="#9e9191" layoutX="66.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your password here">
+      <TextField fx:id="txtPassword" layoutX="47.0" layoutY="339.0" prefHeight="38.0" prefWidth="273.0" />
+      <Text fill="#9e9191" layoutX="66.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your password here">
          <font>
             <Font size="10.0" />
          </font>
       </Text>
       <Button layoutX="122.0" layoutY="440.0" mnemonicParsing="false" onAction="#registerOnAction" style="-fx-background-color: #a020f0;" text="Register Now" textFill="WHITE" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b19cd9" height="578.0" layoutX="365.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="535.0" />
       <ImageView fitHeight="52.0" fitWidth="54.0" layoutX="39.0" layoutY="19.0">
          <image>
-            <Image url="@../asserts.icon/veterinary%20logo.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="559.0" fitWidth="514.0" layoutX="376.0" layoutY="42.0">
-         <image>
-            <Image url="@../asserts.icon/cat%20login%20page.jpg" />
+            <Image url="@../asserts.icon/veterinary logo.jpg" />
          </image>
       </ImageView>
       <Button layoutX="819.0" layoutY="556.0" mnemonicParsing="false" onAction="#btnBackOnAction" style="-fx-background-color: #ffffff;" text="Back" textFill="#a020f0" />

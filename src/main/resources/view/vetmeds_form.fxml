@@ -19,14 +19,16 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Text>
-      <TableView fx:id="tblVetmeds" layoutX="85.0" layoutY="181.0" prefHeight="301.0" prefWidth="730.0">
+      <TableView fx:id="tblVetmeds" layoutX="16.0" layoutY="181.0" prefHeight="273.0" prefWidth="868.0">
         <columns>
-          <TableColumn fx:id="colCode" prefWidth="112.0" text="V_Code" />
-          <TableColumn fx:id="colName" minWidth="0.0" prefWidth="151.0" text="Name" />
-            <TableColumn fx:id="colDesc" prefWidth="194.0" text="Description" />
-            <TableColumn fx:id="colUnitprice" minWidth="0.0" prefWidth="112.0" text="Unit price" />
-            <TableColumn fx:id="colQty" minWidth="0.0" prefWidth="63.0" text="Qty" />
-            <TableColumn fx:id="colAmount" prefWidth="97.0" text="Amount" />
+          <TableColumn fx:id="colCode" prefWidth="67.0" text="V_Code" />
+          <TableColumn fx:id="colName" minWidth="0.0" prefWidth="84.0" text="Order id" />
+            <TableColumn fx:id="colDesc" prefWidth="98.0" text="Item code" />
+            <TableColumn fx:id="colUnitprice" minWidth="0.0" prefWidth="152.0" text="Name" />
+            <TableColumn fx:id="colQty" minWidth="0.0" prefWidth="193.0" text="Description" />
+            <TableColumn fx:id="colAmount" prefWidth="126.0" text="Unit price" />
+            <TableColumn prefWidth="57.0" text="Qty" />
+            <TableColumn prefWidth="90.0" text="Amount" />
         </columns>
       </TableView>
       <Button layoutX="770.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Delete" textFill="WHITE" />
@@ -50,22 +52,28 @@
       <TextField fx:id="txtDesc" layoutX="619.0" layoutY="109.0" onAction="#txtAddDate" prefHeight="30.0" prefWidth="192.0" />
       <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="545.0" layoutY="543.0">
          <image>
-            <Image url="@../asserts.icon/save%20icon.png" />
+            <Image url="@../asserts.icon/save icon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="429.0" layoutY="543.0">
          <image>
-            <Image url="@../asserts.icon/update%20icon.png" />
+            <Image url="@../asserts.icon/update icon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="776.0" layoutY="543.0">
          <image>
-            <Image url="@../asserts.icon/delete%20icon.png" />
+            <Image url="@../asserts.icon/delete icon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="664.0" layoutY="543.0">
          <image>
-            <Image url="@../asserts.icon/clear%20icon.png" />
+            <Image url="@../asserts.icon/clear icon.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="38.0" layoutY="543.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" style="-fx-background-color: black;" text="Pay" textFill="WHITE" />
+      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="44.0" layoutY="546.0">
+         <image>
+            <Image url="@../asserts.icon/payment%20icon.png" />
          </image>
       </ImageView>
    </children>

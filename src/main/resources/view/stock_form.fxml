@@ -56,22 +56,22 @@
       <Button layoutX="400.0" layoutY="550.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Update" textFill="WHITE" />
       <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="530.0" layoutY="553.0">
          <image>
-            <Image url="@../asserts.icon/save%20icon.png" />
+            <Image url="@../asserts.icon/save icon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="406.0" layoutY="553.0">
          <image>
-            <Image url="@../asserts.icon/update%20icon.png" />
+            <Image url="@../asserts.icon/update icon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="647.0" layoutY="553.0">
          <image>
-            <Image url="@../asserts.icon/clear%20icon.png" />
+            <Image url="@../asserts.icon/clear icon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="772.0" layoutY="553.0">
          <image>
-            <Image url="@../asserts.icon/delete%20icon.png" />
+            <Image url="@../asserts.icon/delete icon.png" />
          </image>
       </ImageView>
    </children>
