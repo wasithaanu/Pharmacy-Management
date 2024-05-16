@@ -5,16 +5,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="root" prefHeight="666.0" prefWidth="1150.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Pharmacy.controller.DashboardFormController">
+<AnchorPane fx:id="root" prefHeight="666.0" prefWidth="1150.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Pharmacy.controller.DashboardFormController">
    <children>
-      <Button layoutX="29.0" layoutY="162.0" mnemonicParsing="false" onAction="#btnDashboard" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Dashboard" />
-      <Button layoutX="29.0" layoutY="207.0" mnemonicParsing="false" onAction="#btnCustomer" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Customer" />
-      <Button layoutX="29.0" layoutY="251.0" mnemonicParsing="false" onAction="#btnOrders" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Orders" />
-      <Button layoutX="30.0" layoutY="297.0" mnemonicParsing="false" onAction="#btnEmployee" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #ebdbfd;" text="Employee" />
-      <Button layoutX="29.0" layoutY="343.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Payment bill" />
-      <Button layoutX="29.0" layoutY="389.0" mnemonicParsing="false" onAction="#btnVetmeds" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Vetmeds" />
-      <Button layoutX="29.0" layoutY="435.0" mnemonicParsing="false" onAction="#btnStocks" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Stocks" />
-      <Button layoutX="30.0" layoutY="481.0" mnemonicParsing="false" onAction="#btnSupplier" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Supplier" />
+      <Button layoutX="29.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnDashboard" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Dashboard" />
+      <Button layoutX="29.0" layoutY="211.0" mnemonicParsing="false" onAction="#btnCustomer" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Customer" />
+      <Button layoutX="29.0" layoutY="262.0" mnemonicParsing="false" onAction="#btnOrders" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Orders" />
+      <Button layoutX="30.0" layoutY="318.0" mnemonicParsing="false" onAction="#btnEmployee" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #ebdbfd;" text="Employee" />
+      <Button layoutX="29.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnVetmeds" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Vetmeds" />
+      <Button layoutX="29.0" layoutY="425.0" mnemonicParsing="false" onAction="#btnStocks" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Stocks" />
+      <Button layoutX="29.0" layoutY="481.0" mnemonicParsing="false" onAction="#btnSupplier" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Supplier" />
       <AnchorPane fx:id="Load" layoutX="218.0" layoutY="38.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ebdbfd; -fx-background-radius: 20;">
          <children>
             <ImageView fitHeight="460.0" fitWidth="680.0" layoutX="20.0" layoutY="13.0">
@@ -28,37 +27,32 @@
             <Image url="@../asserts.icon/veterinary logo.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="40.0" layoutY="166.0">
+      <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="40.0" layoutY="167.0">
          <image>
             <Image url="@../asserts.icon/Dashboard icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="43.0" layoutY="211.0">
+      <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="43.0" layoutY="215.0">
          <image>
             <Image url="@../asserts.icon/customer icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="40.0" layoutY="255.0">
+      <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="40.0" layoutY="266.0">
          <image>
             <Image url="@../asserts.icon/Orders icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="40.0" layoutY="301.0">
+      <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="40.0" layoutY="322.0">
          <image>
             <Image url="@../asserts.icon/employee icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="40.0" layoutY="347.0">
-         <image>
-            <Image url="@../asserts.icon/payment bill.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="40.0" layoutY="393.0">
+      <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="40.0" layoutY="378.0">
          <image>
             <Image url="@../asserts.icon/vetmeds icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="42.0" layoutY="440.0">
+      <ImageView fitHeight="23.0" fitWidth="30.0" layoutX="42.0" layoutY="429.0">
          <image>
             <Image url="@../asserts.icon/stock icon.png" />
          </image>
@@ -68,8 +62,8 @@
             <Image url="@../asserts.icon/supplier icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="31.0" layoutY="529.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Salary" />
-      <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="45.0" layoutY="533.0">
+      <Button layoutX="29.0" layoutY="530.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #ebdbfd;" text="Salary" />
+      <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="43.0" layoutY="534.0">
          <image>
             <Image url="@../asserts.icon/salary.png" />
          </image>

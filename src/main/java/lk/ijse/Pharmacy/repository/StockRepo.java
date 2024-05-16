@@ -89,4 +89,24 @@ public class StockRepo {
         }
         return stock;
     }
-}
+
+    public static Stock searchByName(String name) throws SQLException {
+        String sql = "SELECT * FROM stock WHERE name = ?";
+
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+        pstm.setObject(1, name);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            return new Stock(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getDouble(3),
+                    resultSet.getInt(4)
+            );
+        }
+        return null;
+    }
+    }
+

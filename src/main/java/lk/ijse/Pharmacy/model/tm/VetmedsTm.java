@@ -1,4 +1,4 @@
-package lk.ijse.Pharmacy.model;
+package lk.ijse.Pharmacy.model.tm;
 import com.jfoenix.controls.JFXButton;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class Vetmeds {
+public class VetmedsTm {
     private String code;
     private String oId;
     private String itemCode;
