@@ -1,0 +1,91 @@
+ create database Benny_Veterinary_Pharmacy;
+
+ use Benny_Veterinary_Pharmacy;
+
+ create table customer(
+              cu_id varchar(20) primary key,
+              cu_name varchar(20),
+              cu_address varchar(20),
+              cu_contact int(15)
+           );
+
+
+ create table employee(
+              e_id varchar(20) primary key,
+              e_name varchar(20),
+              e_time_period varchar(30),
+              e_salary double(30,2),
+              e_contact int(10)
+            );
+
+ create table orders(
+               type_of_animal varchar(30),
+               animal_diseases varchar(30),
+               o_date date,
+               o_id varchar(20) primary key,
+               cu_id varchar(20),
+               e_id varchar(20),
+               foreign key (cu_id) references customer(cu_id) on update cascade on delete cascade,
+               foreign key (e_id) references employee(e_id) on update cascade on delete cascade
+             );
+
+
+
+ create table payment(
+              p_id varchar(20) primary key,
+              amount double(50,2),
+              o_id varchar(20),
+              foreign key (o_id) references orders(o_id) on update cascade on delete cascade
+          );
+
+
+
+
+ create table stock(
+              st_code varchar(20) primary key,
+              qty varchar(500),
+              name varchar(30)
+            );
+
+
+
+
+ create table vetmeds(
+              v_code varchar(20) primary key,
+              v_name varchar(30),
+              description varchar(30),
+              unitPrice double(10,2),
+              st_code varchar(20),
+              foreign key (st_code) references stock(st_code) on update cascade on delete cascade
+              );
+
+
+ create table order_detail(
+                o_id varchar(20),
+                v_code varchar(20),
+                foreign key (o_id) references orders(o_id) on update cascade on delete cascade,
+                foreign key (v_code) references vetmeds(v_code) on update cascade on delete cascade
+            );
+
+
+
+
+
+ create table supplier(
+                su_id varchar(20) primary key,
+                su_name varchar(20),
+                su_address varchar(30),
+                su_contact int(10)
+
+                );
+
+ create table supplier_order_detail(
+                qty varchar(500),
+                st_code varchar(20),
+                su_id varchar(20),
+                foreign key (st_code) references stock(st_code) on update cascade on delete cascade,
+                foreign key (su_id) references supplier(su_id) on update cascade on delete cascade
+                 );
+
+
+
