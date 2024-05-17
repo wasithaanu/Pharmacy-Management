@@ -23,30 +23,30 @@
          </font>
       </Text>
       <TextField fx:id="txtId" layoutX="535.0" layoutY="110.0" onAction="#txtSearchOnAction" prefHeight="30.0" prefWidth="220.0" />
-      <Text layoutX="230.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :">
+      <Text layoutX="225.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="txtName" layoutX="230.0" layoutY="193.0" prefHeight="30.0" prefWidth="220.0" />
+      <TextField fx:id="txtName" layoutX="225.0" layoutY="110.0" prefHeight="30.0" prefWidth="220.0" />
       <Text layoutX="535.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Month :">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
       <TextField fx:id="txtMonth" layoutX="535.0" layoutY="193.0" prefHeight="30.0" prefWidth="220.0" />
-      <Text layoutX="230.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
+      <Text layoutX="225.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="txtDate" layoutX="230.0" layoutY="276.0" prefHeight="30.0" prefWidth="220.0" />
-      <Text layoutX="535.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount :">
+      <TextField fx:id="txtDate" layoutX="225.0" layoutY="193.0" prefHeight="30.0" prefWidth="220.0" />
+      <Text layoutX="225.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount :">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="txtAmount" layoutX="535.0" layoutY="276.0" prefHeight="30.0" prefWidth="220.0" />
+      <TextField fx:id="txtAmount" layoutX="225.0" layoutY="276.0" prefHeight="30.0" prefWidth="220.0" />
       <TableView fx:id="tblSalary" layoutX="70.0" layoutY="330.0" prefHeight="200.0" prefWidth="760.0">
         <columns>
           <TableColumn fx:id="colSalaryId" prefWidth="99.0" text=" Salary id" />

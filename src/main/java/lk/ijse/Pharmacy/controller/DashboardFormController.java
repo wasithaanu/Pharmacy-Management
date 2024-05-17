@@ -21,6 +21,23 @@ public class DashboardFormController {
     @FXML
     private AnchorPane root;
 
+
+    @FXML
+    void btnSalary(ActionEvent event) throws IOException {
+        URL resource = getClass().getResource("/view/salary_form.fxml");
+        assert resource != null;
+        Parent load = FXMLLoader.load(resource);
+        Load.getChildren().clear();
+        Load.getChildren().add(load);
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1), Load);
+        transition.setFromX(load.getScene().getWidth());
+        transition.setToX(0);
+        transition.play();
+
+
+    }
+
+
     @FXML
     void btnCustomer(ActionEvent event) throws IOException {
         URL resource = getClass().getResource("/view/customer_form.fxml");

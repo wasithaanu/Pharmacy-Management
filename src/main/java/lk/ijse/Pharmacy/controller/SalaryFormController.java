@@ -86,7 +86,7 @@ public class SalaryFormController {
         return salaryList;
     }
 
-    private void loadNextOrderId() {
+     private void loadNextOrderId() {
         try {
             String currentId = SalaryRepo.currentId();
             String nextId = nextId(currentId);

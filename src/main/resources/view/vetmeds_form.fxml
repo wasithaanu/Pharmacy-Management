@@ -80,7 +80,7 @@
       <Text layoutX="335.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Name:" />
       <Text layoutX="579.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UnitPrice:" />
       <Button layoutX="799.0" layoutY="199.0" mnemonicParsing="false" onAction="#btnAddMedsOnAction" prefHeight="30.0" prefWidth="82.0" style="-fx-background-color: black;" text="Add Meds" textFill="WHITE" />
-      <ComboBox fx:id="cmbOid" layoutX="299.0" layoutY="76.0" onAction="#cmbOidOnAction" prefHeight="24.0" prefWidth="103.0" />
+      <ComboBox fx:id="cmbOid" layoutX="299.0" layoutY="76.0" onAction="#cmbOidOnAction" prefHeight="24.0" prefWidth="103.0" promptText="Order ID" />
       <Label fx:id="lblName" layoutX="335.0" layoutY="183.0" prefHeight="16.0" prefWidth="84.0" />
       <Label fx:id="lblPrice" layoutX="579.0" layoutY="183.0" prefHeight="16.0" prefWidth="84.0" />
       <Text layoutX="676.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Amount:" />

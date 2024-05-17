@@ -3,6 +3,7 @@ package lk.ijse.Pharmacy.repository;
 import lk.ijse.Pharmacy.db.DbConnection;
 import lk.ijse.Pharmacy.model.Customer;
 import lk.ijse.Pharmacy.model.Stock;
+import lk.ijse.Pharmacy.model.StockUpdate;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,6 +54,22 @@ public class StockRepo {
         pstm.setObject(4, stock.getQty());
 
         return pstm.executeUpdate() > 0;
+    }
+
+    private static boolean save(StockUpdate stockUpdate) throws SQLException {
+            if(!update(stockUpdate)) {
+                return false;
+            }
+        return true;
+    }
+
+    public static boolean update(StockUpdate stockUpdate) throws SQLException {
+        String sql = "UPDATE stock SET qty= qty -? WHERE st_code=?"                   ;
+        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
+
+        pstm.setObject(1, stockUpdate.getQty());
+        pstm.setObject(2, stockUpdate.getId());
+        return false;
     }
 
     public static boolean update(Stock stock) throws SQLException {
