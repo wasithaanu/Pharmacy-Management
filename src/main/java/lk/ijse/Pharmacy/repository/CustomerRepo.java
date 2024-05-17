@@ -46,7 +46,7 @@ public class CustomerRepo {
     }
 
     public static boolean delete(String id) throws SQLException {
-        String sql = "DELETE FROM customer WHERE cu_id = ?";
+        String sql = "DELETE FROM customer WHERE cu_name = ?";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
 

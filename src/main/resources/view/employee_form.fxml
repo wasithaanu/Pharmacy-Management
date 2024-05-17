@@ -17,37 +17,31 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Text>
-      <Text layoutX="159.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee id">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
       <Text layoutX="159.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In time">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="526.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Out time">
+      <Text layoutX="526.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Out time">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="526.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee name">
+      <Text layoutX="159.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee name">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="158.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+      <Text layoutX="530.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="txtId" layoutX="158.0" layoutY="114.0" onAction="#txtSearchOnAction" prefHeight="30.0" prefWidth="220.0" />
-      <TextField fx:id="txtName" layoutX="526.0" layoutY="114.0" prefHeight="30.0" prefWidth="220.0" />
+      <TextField fx:id="txtName" layoutX="158.0" layoutY="123.0" prefHeight="30.0" prefWidth="220.0" />
       <TextField fx:id="txtIntime" layoutX="158.0" layoutY="191.0" prefHeight="30.0" prefWidth="220.0" />
-      <TextField fx:id="txtOuttime" layoutX="526.0" layoutY="191.0" prefHeight="30.0" prefWidth="220.0" />
-      <TextField fx:id="txtDate" layoutX="158.0" layoutY="270.0" prefHeight="30.0" prefWidth="220.0" />
-      <TableView fx:id="tblEmployee" layoutX="73.0" layoutY="328.0" prefHeight="196.0" prefWidth="754.0">
+      <TextField fx:id="txtOuttime" layoutX="526.0" layoutY="123.0" prefHeight="30.0" prefWidth="220.0" />
+      <TextField fx:id="txtDate" layoutX="526.0" layoutY="191.0" prefHeight="30.0" prefWidth="220.0" />
+      <TableView fx:id="tblEmployee" layoutX="73.0" layoutY="258.0" onMouseClicked="#mouseClickOnAction" prefHeight="266.0" prefWidth="754.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="116.0" text="Emp id" />
           <TableColumn fx:id="colName" prefWidth="204.0" text="Emp name" />

@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ebdbfd; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Pharmacy.controller.VetmedsFormController">
+<AnchorPane fx:id="rootVetmeds" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ebdbfd; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Pharmacy.controller.VetmedsFormController">
    <children>
       <Text fx:id="root" fill="#a020f0" layoutX="335.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vetmeds details" textAlignment="CENTER">
          <font>
@@ -44,8 +44,7 @@
       <Button layoutX="655.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Clear" textFill="WHITE" />
       <Button layoutX="539.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Save" textFill="WHITE" />
       <Button layoutX="426.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Update" textFill="WHITE" />
-      <ComboBox fx:id="cmbName" layoutX="43.0" layoutY="147.0" onAction="#cmbNameOnAction" prefHeight="24.0" prefWidth="103.0" />
-      <Text layoutX="51.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+      <ComboBox fx:id="cmbName" layoutX="43.0" layoutY="147.0" onAction="#cmbNameOnAction" prefHeight="24.0" prefWidth="103.0" promptText="Name" />
       <TextField fx:id="txtQty" layoutX="739.0" layoutY="148.0" onAction="#QtyOnAction" prefHeight="24.0" prefWidth="38.0" />
       <Text layoutX="695.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty :">
          <font>
@@ -82,7 +81,6 @@
       <Text layoutX="579.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UnitPrice:" />
       <Button layoutX="799.0" layoutY="199.0" mnemonicParsing="false" onAction="#btnAddMedsOnAction" prefHeight="30.0" prefWidth="82.0" style="-fx-background-color: black;" text="Add Meds" textFill="WHITE" />
       <ComboBox fx:id="cmbOid" layoutX="299.0" layoutY="76.0" onAction="#cmbOidOnAction" prefHeight="24.0" prefWidth="103.0" />
-      <Text layoutX="308.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Id" />
       <Label fx:id="lblName" layoutX="335.0" layoutY="183.0" prefHeight="16.0" prefWidth="84.0" />
       <Label fx:id="lblPrice" layoutX="579.0" layoutY="183.0" prefHeight="16.0" prefWidth="84.0" />
       <Text layoutX="676.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Amount:" />
@@ -90,8 +88,8 @@
       <Text layoutX="49.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
       <TextField fx:id="txtDate" layoutX="89.0" layoutY="76.0" prefHeight="24.0" prefWidth="138.0" />
       <Text layoutX="478.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desc:" />
-      <Label fx:id="lblDesc" layoutX="478.0" layoutY="183.0" prefHeight="16.0" prefWidth="84.0" text="Label" />
+      <Label fx:id="lblDesc" layoutX="478.0" layoutY="183.0" prefHeight="16.0" prefWidth="84.0" />
       <Text layoutX="205.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Code:" />
-      <Label fx:id="lblItemCode" layoutX="209.0" layoutY="183.0" prefHeight="16.0" prefWidth="63.0" text="Label" />
+      <Label fx:id="lblItemCode" layoutX="209.0" layoutY="183.0" prefHeight="16.0" prefWidth="63.0" />
    </children>
 </AnchorPane>

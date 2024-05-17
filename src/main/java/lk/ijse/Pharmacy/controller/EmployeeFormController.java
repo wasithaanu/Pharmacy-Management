@@ -9,9 +9,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.Pharmacy.model.Customer;
 import lk.ijse.Pharmacy.model.Employee;
+import lk.ijse.Pharmacy.model.tm.CustomerTm;
 import lk.ijse.Pharmacy.model.tm.EmployeeTm;
 import lk.ijse.Pharmacy.repository.CustomerRepo;
 import lk.ijse.Pharmacy.repository.EmployeeRepo;
@@ -48,6 +50,7 @@ public class EmployeeFormController {
 
     @FXML
     private TextField txtId;
+    private String nextId;
 
     @FXML
     private TextField txtIntime;
@@ -64,6 +67,7 @@ public class EmployeeFormController {
         this.employeeList = getAllEmployee();
         setCellValueFactory();
         loadEmployeeTable();
+        loadNextOrderId();
     }
     private void setCellValueFactory() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -72,6 +76,27 @@ public class EmployeeFormController {
         colOuttime.setCellValueFactory(new PropertyValueFactory<>("outTime"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 
+    }
+
+    private void loadNextOrderId() {
+        try {
+            String currentId = EmployeeRepo.currentId();
+             nextId = nextId(currentId);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String nextId(String currentId) {
+        if (currentId != null) {
+            String[] split = currentId.split("E");
+//            System.out.println("Arrays.toString(split) = " + Arrays.toString(split));
+            int id = Integer.parseInt(split[1]);    //2
+            return "E" + ++id;
+
+        }
+        return "O1";
     }
 
 
@@ -107,6 +132,16 @@ public class EmployeeFormController {
         return employeeList;
     }
 
+    public void mouseClickOnAction(MouseEvent mouseEvent) {
+        EmployeeTm selectedItem = tblEmployee.getSelectionModel().getSelectedItem();
+        txtName.setText(selectedItem.getName());
+        txtIntime.setText(selectedItem.getInTime());
+        txtOuttime.setText(selectedItem.getOutTime());
+        txtDate.setText(selectedItem.getDate());
+       // txtContact.setText(String.valueOf(selectedItem.getContact()));
+    }
+
+
     @FXML
     void btnClearOnAction(ActionEvent event) {
         clearFields();
@@ -123,10 +158,10 @@ public class EmployeeFormController {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        String id = txtId.getText();
+        String name = txtName.getText();
 
         try {
-            boolean isDeleted = EmployeeRepo.delete(id);
+            boolean isDeleted = EmployeeRepo.delete(name);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "employee deleted!").show();
             }
@@ -137,7 +172,7 @@ public class EmployeeFormController {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
-        String id = txtId.getText();
+        String id = nextId;
         String name = txtName.getText();
         String inTime = txtIntime.getText();
         String outTime = txtOuttime.getText();

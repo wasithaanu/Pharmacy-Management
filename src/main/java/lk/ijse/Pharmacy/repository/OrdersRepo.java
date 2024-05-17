@@ -4,6 +4,7 @@ import lk.ijse.Pharmacy.db.DbConnection;
 import lk.ijse.Pharmacy.model.Customer;
 import lk.ijse.Pharmacy.model.Order;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -96,5 +97,34 @@ public class OrdersRepo {
             order = new Order(type_of_animal, animal_diseases, o_date, o_id,cu_id,e_id);
         }
         return order;
+    }
+
+    public static String currentId() throws SQLException {
+        String sql = "SELECT o_id FROM orders ORDER BY o_id desc LIMIT 1";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+
+        if(resultSet.next()) {
+            return resultSet.getString(1);
+        }
+        return null;
+    }
+
+    public static List<String> getOIds() throws SQLException {
+
+        String sql = "SELECT o_id FROM product";
+
+        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
+
+        List<String> idList = new ArrayList<>();
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        while(resultSet.next()) {
+            idList.add(resultSet.getString(1));
+        }
+        return idList;
     }
 }

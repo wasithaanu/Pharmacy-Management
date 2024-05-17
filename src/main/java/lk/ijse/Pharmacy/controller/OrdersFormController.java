@@ -64,6 +64,7 @@ public class OrdersFormController {
 
     @FXML
     private TextField txtId;
+    private String nextId;
 
     private List<Order> orderList = new ArrayList<>();
 
@@ -71,6 +72,7 @@ public class OrdersFormController {
         this.orderList = getAllOrders();
         setCellValueFactory();
         loadOrdersTable();
+        loadNextOrderId();
     }
 
     private void loadOrdersTable() {
@@ -99,8 +101,29 @@ public class OrdersFormController {
         colAnimal.setCellValueFactory(new PropertyValueFactory<>("animal"));
         colDisesses.setCellValueFactory(new PropertyValueFactory<>("diseases"));
         colCusid.setCellValueFactory(new PropertyValueFactory<>("cusId"));
-        colEmpid.setCellValueFactory(new PropertyValueFactory<>("empId"));
     }
+
+    private void loadNextOrderId() {
+        try {
+            String currentId = OrdersRepo.currentId();
+             nextId = nextId(currentId);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String nextId(String currentId) {
+        if (currentId != null) {
+            String[] split = currentId.split("O");
+//            System.out.println("Arrays.toString(split) = " + Arrays.toString(split));
+            int id = Integer.parseInt(split[1]);    //2
+            return "O" + ++id;
+
+        }
+        return "O1";
+    }
+
 
     private List<Order> getAllOrders() {
         List<Order> orderList = null;
@@ -142,7 +165,7 @@ public class OrdersFormController {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
-        String id = txtId.getText();
+        String id = nextId;
         String date = txtDate.getText();
         String animal = txtAnimal.getText();
         String diseases = txtDisesses.getText();

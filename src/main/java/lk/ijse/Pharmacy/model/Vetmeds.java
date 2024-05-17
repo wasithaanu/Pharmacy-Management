@@ -10,12 +10,13 @@ import lombok.NoArgsConstructor;
 
 public class Vetmeds {
     private String code;
-    private String oId;
-    private String itemCode;
     private String name;
     private String desc;
     private double unitPrice;
-    private int qty;
+    private String itemCode;
     private double amount;
+    private int qty;
+    private String oId;
+    private String date;
     private JFXButton btnRemove;
 }

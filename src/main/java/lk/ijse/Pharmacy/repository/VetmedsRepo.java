@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class VetmedsRepo {
     public static String currentId() throws SQLException {
-        String sql = "SELECT v_code FROM customer ORDER BY v_code desc LIMIT 1";
+        String sql = "SELECT v_code FROM vetmeds ORDER BY v_code desc LIMIT 1";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);

@@ -4,6 +4,7 @@ import lk.ijse.Pharmacy.db.DbConnection;
 import lk.ijse.Pharmacy.model.Customer;
 import lk.ijse.Pharmacy.model.Employee;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class EmployeeRepo {
             String name = resultSet.getString(2);
             String inTime = resultSet.getString(3);
             String outTime = resultSet.getString(4);
-            String date = resultSet.getString(4);
+            String date = resultSet.getString(5);
 
             Employee employee = new Employee(id, name, inTime, outTime,date);
             employeeList.add(employee);
@@ -85,7 +86,7 @@ public class EmployeeRepo {
     }
 
     public static boolean delete(String id) throws SQLException {
-        String sql = "DELETE FROM employee WHERE cu_id = ?";
+        String sql = "DELETE FROM employee WHERE e_name = ?";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
 
@@ -93,4 +94,18 @@ public class EmployeeRepo {
 
         return pstm.executeUpdate() > 0;
     }
+
+    public static String currentId() throws SQLException {
+        String sql = "SELECT e_id FROM employee ORDER BY e_id desc LIMIT 1";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+
+        if(resultSet.next()) {
+            return resultSet.getString(1);
+        }
+        return null;
+    }
+
 }
