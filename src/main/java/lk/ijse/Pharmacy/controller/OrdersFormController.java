@@ -173,9 +173,11 @@ public class OrdersFormController {
         String empId = txtEmpid.getText();
 
         Order order = new Order(id, date, animal, diseases,cusId,empId);
+        System.out.println(order);
 
         try {
             boolean isSaved = OrdersRepo.save(order);
+            System.out.println("order"+isSaved);
             if (isSaved) new Alert(Alert.AlertType.CONFIRMATION, "order saved!").show();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

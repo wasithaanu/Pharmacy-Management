@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class Stock {
     private String id;
     private String name;
-    private Double unitPrice;
-    private Integer qty;
+    private double unitPrice;
+    private int qty;
 
 }

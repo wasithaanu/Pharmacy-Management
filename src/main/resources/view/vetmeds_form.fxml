@@ -44,13 +44,9 @@
       <Button layoutX="655.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Clear" textFill="WHITE" />
       <Button layoutX="539.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Save" textFill="WHITE" />
       <Button layoutX="426.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #a020f0;" text="Update" textFill="WHITE" />
-      <ComboBox fx:id="cmbName" layoutX="43.0" layoutY="147.0" onAction="#cmbNameOnAction" prefHeight="24.0" prefWidth="103.0" promptText="Name" />
+      <ComboBox fx:id="cmbName" layoutX="43.0" layoutY="147.0" onAction="#cmbNameOnAction" prefHeight="24.0" prefWidth="131.0" promptText="Name" />
       <TextField fx:id="txtQty" layoutX="739.0" layoutY="148.0" onAction="#QtyOnAction" prefHeight="24.0" prefWidth="38.0" />
-      <Text layoutX="695.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty :">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
+      <Text layoutX="695.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty :" />
       <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="545.0" layoutY="543.0">
          <image>
             <Image url="@../asserts.icon/save icon.png" />
@@ -77,19 +73,20 @@
             <Image url="@../asserts.icon/payment icon.png" />
          </image>
       </ImageView>
-      <Text layoutX="335.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Name:" />
       <Text layoutX="579.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UnitPrice:" />
       <Button layoutX="799.0" layoutY="199.0" mnemonicParsing="false" onAction="#btnAddMedsOnAction" prefHeight="30.0" prefWidth="82.0" style="-fx-background-color: black;" text="Add Meds" textFill="WHITE" />
       <ComboBox fx:id="cmbOid" layoutX="299.0" layoutY="76.0" onAction="#cmbOidOnAction" prefHeight="24.0" prefWidth="103.0" promptText="Order ID" />
-      <Label fx:id="lblName" layoutX="335.0" layoutY="183.0" prefHeight="16.0" prefWidth="84.0" />
       <Label fx:id="lblPrice" layoutX="579.0" layoutY="183.0" prefHeight="16.0" prefWidth="84.0" />
       <Text layoutX="676.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Amount:" />
       <Label fx:id="lblAmount" layoutX="780.0" layoutY="492.0" prefHeight="16.0" prefWidth="84.0" text="Label" />
       <Text layoutX="49.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
       <TextField fx:id="txtDate" layoutX="89.0" layoutY="76.0" prefHeight="24.0" prefWidth="138.0" />
-      <Text layoutX="478.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desc:" />
       <Label fx:id="lblDesc" layoutX="478.0" layoutY="183.0" prefHeight="16.0" prefWidth="84.0" />
-      <Text layoutX="205.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Code:" />
-      <Label fx:id="lblItemCode" layoutX="209.0" layoutY="183.0" prefHeight="16.0" prefWidth="63.0" />
+      <Text layoutX="220.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Code:" />
+      <Label fx:id="lblItemCode" layoutX="224.0" layoutY="183.0" prefHeight="16.0" prefWidth="63.0" />
+      <Text layoutX="401.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
+      <TextField fx:id="txtDesc" layoutX="356.0" layoutY="179.0" />
+      <Text layoutX="490.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="V code:" />
+      <TextField fx:id="txtVcode" layoutX="545.0" layoutY="76.0" prefHeight="24.0" prefWidth="103.0" />
    </children>
 </AnchorPane>

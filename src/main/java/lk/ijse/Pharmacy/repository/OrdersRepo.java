@@ -127,4 +127,18 @@ public class OrdersRepo {
         }
         return idList;
     }
+
+    public static List<String> getIds() throws SQLException {
+        String sql = "SELECT o_id FROM orders";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        ResultSet resultSet = connection.prepareStatement(sql).executeQuery();
+
+        List<String> idList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            idList.add(resultSet.getString(1));
+        }
+        return idList;
+    }
 }

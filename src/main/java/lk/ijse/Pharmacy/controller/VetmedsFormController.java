@@ -13,9 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.Pharmacy.model.*;
 import lk.ijse.Pharmacy.model.tm.VetmedsTm;
-import lk.ijse.Pharmacy.repository.OrdersRepo;
-import lk.ijse.Pharmacy.repository.StockRepo;
-import lk.ijse.Pharmacy.repository.UpdateAndSaveRepo;
+import lk.ijse.Pharmacy.repository.*;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -81,12 +79,19 @@ public class VetmedsFormController {
     private TextField txtDate;
 
     @FXML
-    private Label lblDesc;
-
-    @FXML
     private Label lblItemCode;
 
+    @FXML
+    private TextField txtDesc;
 
+    @FXML
+    private TextField txtVcode;
+
+
+
+
+
+    private String nextId;
 
 
 
@@ -96,14 +101,47 @@ public class VetmedsFormController {
         setCellValueFactory();
         setDate();
         loadVetmedsTable();
-        //getCustomerIds();
-        // getItemCodes();
+        getOrderIds();
+        getStockNames();
+
+    }
+
+    private void getStockNames() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> idList = StockRepo.getName();
+
+            for (String id : idList) {
+                obList.add(id);
+            }
+            cmbName.setItems(obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void getOrderIds() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> idList = OrdersRepo.getIds();
+
+            for (String id : idList) {
+                obList.add(id);
+            }
+            cmbOid.setItems(obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
     private void setCellValueFactory() {
         colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
-        colId.setCellValueFactory(new PropertyValueFactory<>("Oid"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("oId"));
         colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colDesc.setCellValueFactory(new PropertyValueFactory<>("desc"));
@@ -125,8 +163,7 @@ public class VetmedsFormController {
                     vetmeds.getAmount(),
                     vetmeds.getQty(),
                     vetmeds.getOId(),
-                    vetmeds.getDate(),
-                    vetmeds.getBtnRemove()
+                    vetmeds.getDate()
             );
 
             tmList.add(vetmedsTm);
@@ -168,32 +205,17 @@ public class VetmedsFormController {
 
     @FXML
     void btnAddMedsOnAction(ActionEvent event) {
-        String code = txtCode.getText();
+        String code = txtVcode.getText();
         String oId = (String) cmbOid.getValue();
         String name = (String) cmbName.getValue();
         String itemCode = lblItemCode.getText();
-        String desc = lblDesc.getText();
+        String desc = txtDesc.getText();
         double unitPrice = Double.parseDouble(lblPrice.getText());
         int qty = Integer.parseInt(txtQty.getText());
         double amount = qty * unitPrice;
         String date = txtDate.getText();
-        var btnRemove = new JFXButton("remove");
-        btnRemove.setCursor(Cursor.HAND);
 
-        btnRemove.setOnAction((e) -> {
-            ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
-            ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-            Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
-
-            if(type.orElse(no) == yes) {
-                int selectedIndex = tblVetmeds.getSelectionModel().getSelectedIndex();
-                vetmedsList.remove(selectedIndex);
-
-                tblVetmeds.refresh();
-                calculateNetTotal();
-            }
-        });
 
         for (int i = 0; i < tblVetmeds.getItems().size(); i++) {
            if (code.equals(colItemCode.getCellData(i))) {
@@ -205,17 +227,17 @@ public class VetmedsFormController {
 
                 tblVetmeds.refresh();
                 calculateNetTotal();
-                txtQty.setText("");
-                return;
+
+
             }
         }
 
-        VetmedsTm vetmedsTm = new VetmedsTm(code, name, desc, unitPrice, itemCode, amount, qty, oId, date, btnRemove);
-
+        VetmedsTm vetmedsTm = new VetmedsTm(code, name, desc, unitPrice, itemCode, amount, qty, oId, date);
+        System.out.println(vetmedsTm+"ammt");
         vetmedsList.add(vetmedsTm);
 
         tblVetmeds.setItems(vetmedsList);
-        txtQty.setText("");
+
         calculateNetTotal();
     }
 
@@ -231,7 +253,7 @@ public class VetmedsFormController {
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
-        txtCode.setText("");
+        txtVcode.setText("");
     }
 
     @FXML
@@ -245,7 +267,8 @@ public class VetmedsFormController {
          String stockId = colItemCode.getText();
          int qty = Integer.parseInt(colQty.getText());
 
-        var stock =new StockUpdate(stockId,qty);
+        var     stock =new StockUpdate(stockId,qty);
+        System.out.println(stock+"stock eka ");
 
         List<VetmedDetails> odList = new ArrayList<>();
         for (int i = 0; i < tblVetmeds.getItems().size(); i++) {
@@ -264,9 +287,11 @@ public class VetmedsFormController {
                     tm.getDate()
             );
             odList.add(od);
+            System.out.println(od+"huththooo");
         }
 
         StockAndVetmeds po = new StockAndVetmeds(stock, odList);
+        System.out.println(po+",me po eka ");
         try {
             boolean isPlaced = UpdateAndSaveRepo.updateAndSave(po);
             if(isPlaced) {
@@ -296,48 +321,22 @@ public class VetmedsFormController {
             Stock stock = StockRepo.searchByName(name);
             if (stock != null) {
                 lblItemCode.setText(stock.getId());
-                lblName.setText(String.valueOf(stock.getName()));
-                lblItemCode.setText(String.valueOf(stock.getId()));
                 lblPrice.setText(String.valueOf(stock.getUnitPrice()));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        txtQty.requestFocus();
     }
 
     @FXML
     void cmbOidOnAction(ActionEvent event) {
-       String oId = (String) cmbOid.getValue();
 
-        ObservableList<String> obList = FXCollections.observableArrayList();
-
-        try {
-            List<String> idList = OrdersRepo.getOIds();
-
-            for (String id : idList) {
-                obList.add(id);
-            }
-            cmbOid.setItems(obList);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        ObservableList<String> observableList = FXCollections.observableArrayList();
-        try {
-            List<String> idList = OrdersRepo.getOIds();
-            for (String id : idList) {
-                observableList.add(id);
-            }
-
-            cmbOid.setItems(observableList);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
-}
+
+    }
+
 
 
 

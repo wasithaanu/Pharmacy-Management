@@ -17,7 +17,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Text>
-      <TableView fx:id="tblStock" layoutX="69.0" layoutY="91.0" prefHeight="275.0" prefWidth="750.0">
+      <TableView fx:id="tblStock" layoutX="69.0" layoutY="91.0" onMouseClicked="#mouseClickOnAction" prefHeight="275.0" prefWidth="750.0">
         <columns>
           <TableColumn fx:id="colCode" prefWidth="200.0" text="Item Code" />
           <TableColumn fx:id="colName" prefWidth="243.0" text="Name" />

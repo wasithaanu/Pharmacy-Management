@@ -18,5 +18,4 @@ public class VetmedsTm {
     private int qty;
     private String oId;
     private String date;
-    private JFXButton btnRemove;
 }

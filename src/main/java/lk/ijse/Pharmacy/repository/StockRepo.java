@@ -5,6 +5,7 @@ import lk.ijse.Pharmacy.model.Customer;
 import lk.ijse.Pharmacy.model.Stock;
 import lk.ijse.Pharmacy.model.StockUpdate;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -69,6 +70,7 @@ public class StockRepo {
 
         pstm.setObject(1, stockUpdate.getQty());
         pstm.setObject(2, stockUpdate.getId());
+        System.out.println("ehema puluwnd?");
         return false;
     }
 
@@ -78,10 +80,10 @@ public class StockRepo {
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
 
-        pstm.setObject(1, stock.getId());
-        pstm.setObject(2, stock.getName());
-        pstm.setObject(3, stock.getUnitPrice());
-        pstm.setObject(4, stock.getQty());
+        pstm.setObject(1, stock.getName());
+        pstm.setObject(2, stock.getUnitPrice());
+        pstm.setObject(3, stock.getQty());
+        pstm.setObject(4, stock.getId());
 
         return pstm.executeUpdate() > 0;
     }
@@ -125,5 +127,32 @@ public class StockRepo {
         }
         return null;
     }
+
+    public static List<String> getName() throws SQLException {
+        String sql = "SELECT  name FROM stock";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        ResultSet resultSet = connection.prepareStatement(sql).executeQuery();
+        List<String> idList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            idList.add(resultSet.getString(1));
+        }
+        return idList;
     }
+
+    public static String currentId() throws SQLException {
+        String sql = "SELECT v_code FROM vetmeds ORDER BY v_code desc LIMIT 1";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+
+        if(resultSet.next()) {
+            return resultSet.getString(1);
+        }
+        return null;
+
+    }
+}
 

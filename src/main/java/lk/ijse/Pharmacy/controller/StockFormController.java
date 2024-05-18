@@ -9,9 +9,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.Pharmacy.model.Customer;
 import lk.ijse.Pharmacy.model.Stock;
+import lk.ijse.Pharmacy.model.tm.CustomerTm;
 import lk.ijse.Pharmacy.model.tm.StockTm;
 import lk.ijse.Pharmacy.repository.CustomerRepo;
 import lk.ijse.Pharmacy.repository.StockRepo;
@@ -133,8 +135,10 @@ public class StockFormController {
         try {
             boolean isSaved = StockRepo.save(stock);
             if (isSaved) new Alert(Alert.AlertType.CONFIRMATION, "stock saved!").show();
+
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            initialize();
         }
     }
 
@@ -146,11 +150,12 @@ public class StockFormController {
         Integer qty = Integer.valueOf(txtQty.getText());
 
         Stock stock = new Stock(id, name, unitPrice, qty);
-
+        System.out.println(stock);
         try {
             boolean isUpdated = StockRepo.update(stock);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "stock updated!").show();
+                initialize();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -174,5 +179,15 @@ public class StockFormController {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+        @FXML
+        void mouseClickOnAction(MouseEvent event) {
+                StockTm selectedItem = tblStock.getSelectionModel().getSelectedItem();
+                txtCode.setText(selectedItem.getId());
+                txtName.setText(selectedItem.getName());
+                txtUnitprice.setText(String.valueOf(selectedItem.getUnitPrice()));
+                txtQty.setText(String.valueOf(selectedItem.getQty()));
+        }
 
-}
+    }
+
+

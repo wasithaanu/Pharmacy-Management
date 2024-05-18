@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 
 public class StockUpdate {
     private String id;
-    private Integer qty;
+    private double qty;
 }

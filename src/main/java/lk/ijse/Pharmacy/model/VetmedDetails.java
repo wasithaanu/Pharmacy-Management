@@ -15,7 +15,7 @@ public class VetmedDetails {
     private double unitPrice;
     private String itemCode;
     private double amount;
-    private int qty;
+    private double qty;
     private String oId;
     private String date;
 }

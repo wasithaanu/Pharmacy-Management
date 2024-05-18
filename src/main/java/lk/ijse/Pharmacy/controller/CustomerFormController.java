@@ -76,7 +76,7 @@ public class CustomerFormController {
             String[] split = currentId.split("C");
 //            System.out.println("Arrays.toString(split) = " + Arrays.toString(split));
             int id = Integer.parseInt(split[1]);    //2
-            return "C" + ++id;
+            return "C00" + ++id;
 
         }
         return "1";
@@ -118,15 +118,14 @@ public class CustomerFormController {
     }
 
     @FXML
-    void btnClearOnAction(ActionEvent event) {
-        clearFields();
+    void btnClearOnAction(ActionEvent event){
+        clear();
     }
 
-    private void clearFields() {
-        txtid.setText("");
-        txtName.setText("");
-        txtAddress.setText("");
-        txtContact.setText("");
+    private void clear() {
+        txtName.clear();
+        txtAddress.clear();
+        txtContact.clear();
     }
 
     @FXML
@@ -166,7 +165,6 @@ public class CustomerFormController {
         String name = txtName.getText();
         String address = txtAddress.getText();
         Integer contact = Integer.valueOf(txtContact.getText());
-
         Customer customer = new Customer(id, name, address, contact);
 
         try {

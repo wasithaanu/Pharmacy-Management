@@ -14,6 +14,7 @@ public class UpdateAndSaveRepo {
 
         try {
             boolean isVetmedSaved = VetmedsRepo.save(po.getVetmedDetails());
+            System.out.println(isVetmedSaved +"1");
             if (isVetmedSaved) {
                 boolean isOrderDetailSaved = StockRepo.update(po.getStockUpdate());
                 if (isOrderDetailSaved) {
