@@ -66,6 +66,7 @@ public class SalaryFormController {
 
     @FXML
     private TextField txtSalaryId;
+    private String nextId;
 
     private List<Salary> salaryList = new ArrayList<>();
 
@@ -89,7 +90,7 @@ public class SalaryFormController {
      private void loadNextOrderId() {
         try {
             String currentId = SalaryRepo.currentId();
-            String nextId = nextId(currentId);
+            nextId = nextId(currentId);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -101,7 +102,7 @@ public class SalaryFormController {
             String[] split = currentId.split("S");
 //            System.out.println("Arrays.toString(split) = " + Arrays.toString(split));
             int id = Integer.parseInt(split[1]);    //2
-            return "S" + ++id;
+            return "S00" + ++id;
 
         }
         return "O1";
@@ -162,7 +163,7 @@ public class SalaryFormController {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
-        String saId = txtSalaryId.getText();
+        String saId = nextId;
         String emId = txtId.getText();
         String name = txtName.getText();
         String month = txtMonth.getText();

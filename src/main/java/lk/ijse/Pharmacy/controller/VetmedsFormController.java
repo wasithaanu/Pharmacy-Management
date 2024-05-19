@@ -54,7 +54,7 @@ public class VetmedsFormController {
     private TableColumn<?, ?> colPrice;
 
     @FXML
-    private TableColumn<?, ?> colQty;
+    private TableColumn<VetmedsTm, Integer> colQty;
 
     @FXML
     private Label lblAmount;
@@ -265,7 +265,7 @@ public class VetmedsFormController {
     void btnPayOnAction(ActionEvent event) {
          String vCode = colCode.getText();
          String stockId = colItemCode.getText();
-         int qty = Integer.parseInt(colQty.getText());
+         String qty =colQty.getText();
 
         var     stock =new StockUpdate(stockId,qty);
         System.out.println(stock+"stock eka ");
@@ -287,11 +287,9 @@ public class VetmedsFormController {
                     tm.getDate()
             );
             odList.add(od);
-            System.out.println(od+"huththooo");
         }
 
         StockAndVetmeds po = new StockAndVetmeds(stock, odList);
-        System.out.println(po+",me po eka ");
         try {
             boolean isPlaced = UpdateAndSaveRepo.updateAndSave(po);
             if(isPlaced) {

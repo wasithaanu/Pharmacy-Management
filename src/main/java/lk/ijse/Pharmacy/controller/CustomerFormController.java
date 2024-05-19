@@ -161,7 +161,8 @@ public class CustomerFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        String id = txtid.getText();
+
+        String id = nextId;
         String name = txtName.getText();
         String address = txtAddress.getText();
         Integer contact = Integer.valueOf(txtContact.getText());
@@ -169,6 +170,7 @@ public class CustomerFormController {
 
         try {
             boolean isUpdated = CustomerRepo.update(customer);
+            System.out.println(isUpdated);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "customer updated!").show();
             }
@@ -198,6 +200,7 @@ public class CustomerFormController {
 
     public void mouseClickOnAction(MouseEvent mouseEvent) {
         CustomerTm selectedItem = tblCustomer.getSelectionModel().getSelectedItem();
+        nextId=selectedItem.getId();
         txtName.setText(selectedItem.getName());
         txtAddress.setText(selectedItem.getAddress());
         txtContact.setText(String.valueOf(selectedItem.getContact()));

@@ -76,7 +76,7 @@ public class SalaryRepo {
     }
 
     public static boolean save(Salary salary) throws SQLException {
-        String sql = "INSERT INTO salary VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO salary VALUES(?, ?, ?, ?,?,?)";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
 
@@ -84,8 +84,8 @@ public class SalaryRepo {
         pstm.setObject(2, salary.getEmId());
         pstm.setObject(3, salary.getName());
         pstm.setObject(4, salary.getMonth());
-        pstm.setObject(4, salary.getDate());
-        pstm.setObject(4, salary.getAmount());
+        pstm.setObject(5, salary.getAmount());
+        pstm.setObject(6, salary.getDate());
 
         return pstm.executeUpdate() > 0;
     }
