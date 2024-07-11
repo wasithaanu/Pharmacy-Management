@@ -1,6 +1,11 @@
- create database Benny_Veterinary_Pharmacy;
+reate database Benny_Veterinary_Pharmacy;
 
  use Benny_Veterinary_Pharmacy;
+
+ create table Admin(
+		  Username varchar(100),
+		  Password varchar(100)
+    			);
 
  create table customer(
               cu_id varchar(20) primary key,
@@ -13,9 +18,9 @@
  create table employee(
               e_id varchar(20) primary key,
               e_name varchar(20),
-              e_time_period varchar(30),
-              e_salary double(30,2),
-              e_contact int(10)
+              in_time varchar(30),
+		  out_time varchar(30),
+		  Date varchar(30)
             );
 
  create table orders(
@@ -43,8 +48,9 @@
 
  create table stock(
               st_code varchar(20) primary key,
-              qty varchar(500),
-              name varchar(30)
+		  name varchar(30),
+		  Unit_price double(10,2),
+              qty int(255)
             );
 
 
@@ -56,6 +62,10 @@
               description varchar(30),
               unitPrice double(10,2),
               st_code varchar(20),
+		  amount double(10,2),
+		  qty int(100),
+		  o_id varchar(20),
+		  Date date,
               foreign key (st_code) references stock(st_code) on update cascade on delete cascade
               );
 
@@ -86,6 +96,17 @@
                 foreign key (st_code) references stock(st_code) on update cascade on delete cascade,
                 foreign key (su_id) references supplier(su_id) on update cascade on delete cascade
                  );
+
+
+ create table salary(
+		    sa_id varchar(20) primary key,
+		    e_id varchar(20),
+		    name varchar(20),
+		    month varchar(20),
+		    amount double(10,2),
+		    Date date
+			);
+
 
 
 

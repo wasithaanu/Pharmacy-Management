@@ -8,7 +8,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.Pharmacy.bo.BOFactory;
+import lk.ijse.Pharmacy.bo.custom.CustomerBO;
+import lk.ijse.Pharmacy.bo.custom.LoginBO;
 import lk.ijse.Pharmacy.db.DbConnection;
+import lk.ijse.Pharmacy.dto.AdminDTO;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -27,6 +31,8 @@ public class LoginFormController {
     @FXML
     private TextField txtUserName;
 
+    LoginBO loginBO = (LoginBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOGIN);
+
     @FXML
     public void btnLoginOnAction(ActionEvent event) {
         String userId = txtUserName.getText();
@@ -43,24 +49,20 @@ public class LoginFormController {
 
     private void checkCredential(String userId, String pw) throws SQLException, IOException {
         String sql = "SELECT username, password FROM admin WHERE username = ?";
+        try {
+            AdminDTO adminDTO= loginBO.login(userId);
 
 
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, userId);
-
-        ResultSet resultSet = pstm.executeQuery();
-        if(resultSet.next()) {
-            String dbPw = resultSet.getString(2);
-
-            if(dbPw.equals(pw)) {
+            if(adminDTO.getPassword().equals(pw)) {
                 navigateToTheDashboard();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Password is incorrect!").show();
             }
-        } else {
-            new Alert(Alert.AlertType.INFORMATION, "user id not found!").show();
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
+
     }
 
     private void navigateToTheDashboard() throws IOException {

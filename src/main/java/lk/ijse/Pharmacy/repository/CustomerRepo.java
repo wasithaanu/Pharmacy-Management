@@ -96,6 +96,7 @@ public class CustomerRepo {
 
             Connection connection = DbConnection.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement(sql);
+
             ResultSet resultSet = pstm.executeQuery();
 
             if(resultSet.next()) {

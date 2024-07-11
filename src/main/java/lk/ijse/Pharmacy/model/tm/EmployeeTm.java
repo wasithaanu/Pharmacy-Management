@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 
  public class EmployeeTm {
-    private String id;
-    private String name;
-    private String inTime;
-    private String outTime;
-    private String date;
+   private String e_id;
+   private String e_name;
+   private String in_time;
+   private String out_time;
+   private String date;
 
 }

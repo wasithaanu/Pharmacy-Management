@@ -11,9 +11,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.Pharmacy.bo.BOFactory;
+import lk.ijse.Pharmacy.bo.custom.CustomerBO;
+import lk.ijse.Pharmacy.dto.CustomerDTO;
 import lk.ijse.Pharmacy.model.Customer;
 import lk.ijse.Pharmacy.model.tm.CustomerTm;
-import lk.ijse.Pharmacy.repository.CustomerRepo;
+
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -52,10 +55,13 @@ public class CustomerFormController {
     private TextField txtid;
     private String nextId;
 
-    private List<Customer> customerList = new ArrayList<>();
+
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.CUSTOMER);
+
+
 
     public void initialize() {
-        this.customerList = getAllCustomers();
+
         setCellValueFactory();
         loadCustomerTable();
         loadNextOrderId();
@@ -63,59 +69,45 @@ public class CustomerFormController {
 
     private void loadNextOrderId() {
         try {
-            String currentId = CustomerRepo.currentId();
-            nextId = nextId(currentId);
-
-        } catch (SQLException e) {
+            nextId = customerBO.generateNewCustomerID();
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private String nextId(String currentId) {
-        if (currentId != null) {
-            String[] split = currentId.split("C");
-//            System.out.println("Arrays.toString(split) = " + Arrays.toString(split));
-            int id = Integer.parseInt(split[1]);    //2
-            return "C00" + ++id;
-
-        }
-        return "1";
-    }
-
     private void setCellValueFactory() {
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("cu_id"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("cu_name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("cu_address"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("cu_contact"));
+
     }
 
     private void loadCustomerTable() {
         ObservableList<CustomerTm> tmList = FXCollections.observableArrayList();
 
-        for (Customer customer : customerList) {
-            CustomerTm customerTm = new CustomerTm(
-                    customer.getId(),
-                    customer.getName(),
-                    customer.getAddress(),
-                    customer.getContact()
-            );
 
-            tmList.add(customerTm);
+        try {
+            for (CustomerDTO c : customerBO.getAllCustomers()) {
+                CustomerTm customerTm = new CustomerTm(
+                        c.getCu_id(),
+                        c.getCu_name(),
+                        c.getCu_address(),
+                        c.getCu_contact()
+                );
+                tmList.add(customerTm);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         tblCustomer.setItems(tmList);
         CustomerTm selectedItem = tblCustomer.getSelectionModel().getSelectedItem();
         System.out.println("selectedItem = " + selectedItem);
     }
 
-    private List<Customer> getAllCustomers() {
-        List<Customer> customerList = null;
-        try {
-            customerList = CustomerRepo.getAll();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return customerList;
-    }
 
     @FXML
     void btnClearOnAction(ActionEvent event){
@@ -133,12 +125,17 @@ public class CustomerFormController {
         String name = txtName.getText();
 
         try {
-            boolean isDeleted = CustomerRepo.delete(name);
+            boolean isDeleted = customerBO.deleteCustomer(name);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "customer deleted!").show();
+                setCellValueFactory();
+                loadCustomerTable();
+                loadNextOrderId();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -149,12 +146,17 @@ public class CustomerFormController {
         String address = txtAddress.getText();
         Integer contact = Integer.valueOf(txtContact.getText());
 
-        Customer customer = new Customer(id, name, address, contact);
+        CustomerDTO customer = new CustomerDTO(id, name, address, contact);
 
         try {
-            boolean isSaved = CustomerRepo.save(customer);
-            if (isSaved) new Alert(Alert.AlertType.CONFIRMATION, "customer saved!").show();
-        } catch (SQLException e) {
+            boolean isSaved = customerBO.addCustomer(customer);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "customer saved!").show();
+                setCellValueFactory();
+                loadCustomerTable();
+                loadNextOrderId();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -166,44 +168,29 @@ public class CustomerFormController {
         String name = txtName.getText();
         String address = txtAddress.getText();
         Integer contact = Integer.valueOf(txtContact.getText());
-        Customer customer = new Customer(id, name, address, contact);
+        CustomerDTO customer = new CustomerDTO(id, name, address, contact);
 
         try {
-            boolean isUpdated = CustomerRepo.update(customer);
+            boolean isUpdated = customerBO.updateCustomer(customer);
             System.out.println(isUpdated);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "customer updated!").show();
+                setCellValueFactory();
+                loadCustomerTable();
+                loadNextOrderId();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
-    @FXML
-    void txtSearchOnAction(ActionEvent event) {
-        String id = txtid.getText();
-
-        try {
-            Customer customer = CustomerRepo.searchById(id);
-
-            if (customer != null) {
-                txtid.setText(customer.getId());
-                txtName.setText(customer.getName());
-                txtAddress.setText(customer.getAddress());
-                txtContact.setText(String.valueOf(customer.getContact()));
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-
-    }
 
     public void mouseClickOnAction(MouseEvent mouseEvent) {
         CustomerTm selectedItem = tblCustomer.getSelectionModel().getSelectedItem();
-        nextId=selectedItem.getId();
-        txtName.setText(selectedItem.getName());
-        txtAddress.setText(selectedItem.getAddress());
-        txtContact.setText(String.valueOf(selectedItem.getContact()));
+        nextId=selectedItem.getCu_id();
+        txtName.setText(selectedItem.getCu_name());
+        txtAddress.setText(selectedItem.getCu_address());
+        txtContact.setText(String.valueOf(selectedItem.getCu_contact()));
     }
     }
 

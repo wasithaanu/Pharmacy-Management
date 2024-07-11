@@ -11,12 +11,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.Pharmacy.model.Customer;
+import lk.ijse.Pharmacy.bo.BOFactory;
+import lk.ijse.Pharmacy.bo.custom.EmployeeBO;
+import lk.ijse.Pharmacy.dto.CustomerDTO;
+import lk.ijse.Pharmacy.dto.EmployeeDTO;
 import lk.ijse.Pharmacy.model.Employee;
 import lk.ijse.Pharmacy.model.tm.CustomerTm;
 import lk.ijse.Pharmacy.model.tm.EmployeeTm;
-import lk.ijse.Pharmacy.repository.CustomerRepo;
-import lk.ijse.Pharmacy.repository.EmployeeRepo;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -61,82 +62,66 @@ public class EmployeeFormController {
     @FXML
     private TextField txtOuttime;
 
-    private List<Employee> employeeList = new ArrayList<>();
+
+
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.EMPlOYEE);
 
     public void initialize() {
-        this.employeeList = getAllEmployee();
         setCellValueFactory();
         loadEmployeeTable();
         loadNextOrderId();
     }
     private void setCellValueFactory() {
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colIntime.setCellValueFactory(new PropertyValueFactory<>("inTime"));
-        colOuttime.setCellValueFactory(new PropertyValueFactory<>("outTime"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("e_id"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("e_name"));
+        colIntime.setCellValueFactory(new PropertyValueFactory<>("in_time"));
+        colOuttime.setCellValueFactory(new PropertyValueFactory<>("out_time"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 
     }
 
     private void loadNextOrderId() {
         try {
-            String currentId = EmployeeRepo.currentId();
-             nextId = nextId(currentId);
-
-        } catch (SQLException e) {
+            nextId = employeeBO.generateNewEmployeeID();
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private String nextId(String currentId) {
-        if (currentId != null) {
-            String[] split = currentId.split("E");
-//            System.out.println("Arrays.toString(split) = " + Arrays.toString(split));
-            int id = Integer.parseInt(split[1]);    //2
-            return "E" + ++id;
-
-        }
-        return "O1";
     }
 
 
     private void loadEmployeeTable() {
         ObservableList<EmployeeTm> tmList = FXCollections.observableArrayList();
 
-        for (Employee employee : employeeList) {
-            EmployeeTm employeeTm = new EmployeeTm(
-                    employee.getId(),
-                    employee.getName(),
-                    employee.getInTime(),
-                    employee.getOutTime(),
-                    employee.getDate()
-            );
+        try {
+            for (EmployeeDTO c : employeeBO.getAllEmployee()) {
+                EmployeeTm employeeTm = new EmployeeTm(
+                        c.getE_id(),
+                        c.getE_name(),
+                        c.getIn_time(),
+                        c.getOut_time(),
+                        c.getDate()
+                );
+                tmList.add(employeeTm);
+            }
 
-            tmList.add(employeeTm);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         tblEmployee.setItems(tmList);
-        EmployeeTm selectedItem = (EmployeeTm) tblEmployee.getSelectionModel().getSelectedItem();
+        EmployeeTm selectedItem = tblEmployee.getSelectionModel().getSelectedItem();
         System.out.println("selectedItem = " + selectedItem);
 
-
     }
 
 
-    private List<Employee> getAllEmployee() {
-        List<Employee> employeeList = null;
-        try {
-            employeeList = EmployeeRepo.getAll();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return employeeList;
-    }
 
     public void mouseClickOnAction(MouseEvent mouseEvent) {
         EmployeeTm selectedItem = tblEmployee.getSelectionModel().getSelectedItem();
-        txtName.setText(selectedItem.getName());
-        txtIntime.setText(selectedItem.getInTime());
-        txtOuttime.setText(selectedItem.getOutTime());
+        txtName.setText(selectedItem.getE_name());
+        txtIntime.setText(selectedItem.getIn_time());
+        txtOuttime.setText(selectedItem.getOut_time());
         txtDate.setText(selectedItem.getDate());
        // txtContact.setText(String.valueOf(selectedItem.getContact()));
     }
@@ -159,14 +144,18 @@ public class EmployeeFormController {
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         String name = txtName.getText();
-
         try {
-            boolean isDeleted = EmployeeRepo.delete(name);
+            boolean isDeleted = employeeBO.deleteEmployee(name);
             if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "employee deleted!").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Employee deleted!").show();
+                setCellValueFactory();
+                loadEmployeeTable();
+                loadNextOrderId();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -178,14 +167,22 @@ public class EmployeeFormController {
         String outTime = txtOuttime.getText();
         String date = txtDate.getText();
 
-        Employee employee = new Employee(id, name, inTime, outTime, date);
+        EmployeeDTO employee = new EmployeeDTO(id, name, inTime, outTime, date);
+
+
 
         try {
-            boolean isSaved = EmployeeRepo.save(employee);
-            if (isSaved) new Alert(Alert.AlertType.CONFIRMATION, "employee saved!").show();
-        } catch (SQLException e) {
+            boolean isSaved = employeeBO.addEmployee(employee);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "employee saved!").show();
+                setCellValueFactory();
+                loadEmployeeTable();
+                loadNextOrderId();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+
     }
 
     @FXML
@@ -196,36 +193,41 @@ public class EmployeeFormController {
         String outTime = txtOuttime.getText();
         String date = txtDate.getText();
 
-        Employee employee = new Employee(id, name, inTime, outTime, date);
+        EmployeeDTO employee = new EmployeeDTO(id, name, inTime, outTime, date);
 
         try {
-            boolean isUpdated =EmployeeRepo.update(employee);
+            boolean isUpdated = employeeBO.updateEmployee(employee);
+            System.out.println(isUpdated);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "customer updated!").show();
+                setCellValueFactory();
+                loadEmployeeTable();
+                loadNextOrderId();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+
     }
 
     @FXML
     void txtSearchOnAction(ActionEvent event) {
-        String id = txtId.getText();
-
-        try {
-            Employee employee = EmployeeRepo.searchById(id);
-
-            if (employee != null) {
-                txtId.setText(employee.getId());
-                txtName.setText(employee.getName());
-                txtIntime.setText(employee.getInTime());
-                txtOuttime.setText(employee.getOutTime());
-                txtDate.setText(employee.getDate());
-
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
+//        String id = txtId.getText();
+//
+//        try {
+//            Employee employee = EmployeeRepo.searchById(id);
+//
+//            if (employee != null) {
+//                txtId.setText(employee.getId());
+//                txtName.setText(employee.getName());
+//                txtIntime.setText(employee.getInTime());
+//                txtOuttime.setText(employee.getOutTime());
+//                txtDate.setText(employee.getDate());
+//
+//            }
+//        } catch (SQLException e) {
+//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+//        }
     }
 
 }

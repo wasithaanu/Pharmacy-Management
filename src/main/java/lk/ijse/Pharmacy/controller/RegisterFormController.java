@@ -8,7 +8,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.Pharmacy.bo.BOFactory;
+import lk.ijse.Pharmacy.bo.custom.RegisterBO;
 import lk.ijse.Pharmacy.db.DbConnection;
+import lk.ijse.Pharmacy.dto.AdminDTO;
+import lk.ijse.Pharmacy.dto.CustomerDTO;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -29,6 +33,8 @@ public class RegisterFormController {
     @FXML
     private TextField txtUserName;
 
+    RegisterBO registerBO = (RegisterBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.REGISTER);
+
     @FXML
     void registerOnAction(ActionEvent event) {
         String user_id = txtUserId.getText();
@@ -39,21 +45,18 @@ public class RegisterFormController {
     }
 
     private void saveUser(String userId , String pw) {
+        AdminDTO adminDTO = new AdminDTO(userId,pw);
+
         try {
-            String sql = "INSERT INTO admin VALUES(?,  ?)";
-
-            Connection connection = DbConnection.getInstance().getConnection();
-            PreparedStatement pstm = connection.prepareStatement(sql);
-            pstm.setObject(1, userId);
-            pstm.setObject(2, pw);
-
-            if(pstm.executeUpdate() > 0) {
+            boolean isSaved = registerBO.regAdmin(adminDTO);
+            if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Admin saved!").show();
                 navigateToTheDashboard();
             }
-        } catch (SQLException | IOException e) {
+        } catch (SQLException | ClassNotFoundException | IOException e) {
             new Alert(Alert.AlertType.ERROR, "something happend!").show();
         }
+
     }
 
     private void navigateToTheDashboard() throws IOException {
